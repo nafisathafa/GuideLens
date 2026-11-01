@@ -1,0 +1,9 @@
+modules = ["python-3.11", "nodejs-20"]
+run = "uvicorn backend.app.main:app --host 0.0.0.0 --port 8000"
+
+[nix]
+channel = "stable-23_11"
+
+[deployment]
+run = ["sh", "-c", "uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"]
+build = ["sh", "-c", "cd frontend && npm install && npm run build && cd .. && pip install -r backend/requirements.txt"]
